@@ -14,8 +14,21 @@ class SheriffController < ApplicationController
 
   def create
     render json: {
-      text: HEADSPACE + params[:text] + BODY,
+      text: make_response(params[:text]), 
       response_type: "in_channel"
     }
+  end
+
+
+  def make_response(unsplit)
+    text = unsplit.split(' ')
+    head = text.shift
+    subtext = ""
+    if text.any?
+      rest = text.join(" ")
+      subtext = "\nhowdy. im the sheriff of " + rest + ". im gon " + rest
+    end
+
+    HEADSPACE + head + BODY + subtext 
   end
 end
