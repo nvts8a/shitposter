@@ -13,6 +13,9 @@ class SheriffController < ApplicationController
   end
 
   def create
-    render text: HEADSPACE + params[:text] + BODY 
+    render json: {
+      text: HEADSPACE + params[:text] + BODY,
+      response_type: "in_channel"
+    }
   end
 end
