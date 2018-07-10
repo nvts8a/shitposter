@@ -1,6 +1,6 @@
 class SheriffController < ApplicationController
-  BODY = 
-".             :babby:\n" +
+  HEADSPACE = ".             "
+  BODY = "\n" + 
 ".       :100::100::100:\n" +
 ".    :100:   :100:   :100:\n" +
 ".    :point_down: :100::100: :point_down:\n" +
@@ -13,6 +13,6 @@ class SheriffController < ApplicationController
   end
 
   def create
-    render text: BODY 
+    render text: HEADSPACE + params[:text] + BODY 
   end
 end
