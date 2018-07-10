@@ -28,9 +28,12 @@ class SheriffController < ApplicationController
       rest1 = text.join(" ")
       rest1.downcase!
       rest2 = rest1.clone
-      rest2.gsub! 'ing ', ' '
-      rest2.gsub! "in\' ", ' '
-      rest2.gsub! 'in ', ' '
+      rest2.gsub! /ing$/, ''
+      rest2.gsub! /in'$/, ''
+      rest2.gsub! /in$/, ''
+      rest2.gsub! /ing /, ' '
+      rest2.gsub! /in' /, ' '
+      rest2.gsub! /in /, ' '
       
       subtext = "\nhowdy. im the sheriff of " + rest1 + ". im gon " + rest2
     end
