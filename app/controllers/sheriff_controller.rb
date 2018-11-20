@@ -1,9 +1,18 @@
 class SheriffController < ApplicationController
+  DEFAULTHEAD = ":face_with_cowboy_hat:"
   HEADSPACE = "　             "
   BODY = "\n" + 
 "　       :100::100::100:\n" +
 "　    :100:   :100:   :100:\n" +
 "　   :point_down:  :100::100:  :point_down:\n" +
+"　       :100:      :100:\n" +
+"　       :100:        :100:\n" +
+"　       :boot:        :boot:\n"
+
+  ALTBODY = "\n" + 
+"　       :100::100::100:\n" +
+"　    :100:   :100:   :100:\n" +
+"　   :ok_hand:  :100::100:  :ok_hand:\n" +
 "　       :100:      :100:\n" +
 "　       :100:        :100:\n" +
 "　       :boot:        :boot:\n"
@@ -23,6 +32,17 @@ class SheriffController < ApplicationController
   def make_response(unsplit)
     text = unsplit.split(' ')
     head = text.shift
+    body = BODY
+
+    if head[0] != ":" || head[-1] != ":")
+      head = DEFAULTHEAD
+      test.unshift(head)
+    end
+
+    if head == ":joy:"
+      body = ALTBODY
+    end
+
     subtext = ""
     if text.any?
       rest1 = text.join(" ")
@@ -38,6 +58,6 @@ class SheriffController < ApplicationController
       subtext = "\nhowdy. im the sheriff of " + rest1 + ". im gon " + rest2
     end
 
-    HEADSPACE + head + BODY + subtext 
+    HEADSPACE + head + body + subtext 
   end
 end
